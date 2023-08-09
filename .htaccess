@@ -1,0 +1,21 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$0 [PT,L]
+
+php_value date.timezone 'Asia/Bangkok'
+
+php_value max_execution_time 300
+php_value memory_limit 128M
+php_value post_max_size 20M
+php_value upload_max_filesize 10M
+
+
+
+
+php_value error_reporting 1
+php_flag display_errors off
+php_flag display_startup_errors off
+
+php_flag log_errors on
+php_value error_log "/var/www/html/Application/log_error/recruit_new_students/file.log"
