@@ -72,6 +72,14 @@
 		})
 	}) 
 </script>		
+
+<script>
+	$(document).ready(function(){
+		$('.select-search').select2();
+	})
+</script>
+
+
 <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->			
 	<?php
 		$AgainStore=new AgainStore($StoreKey,$est_year);
@@ -172,6 +180,7 @@
 						</div>					
 					</div>
 				</div>
+
 				<hr>
 				<div class="row">
 					<div class="col-<?php echo $grid;?>-12">
@@ -230,22 +239,63 @@
 				<hr>
 				<div class="row">
 					<div class="col-<?php echo $grid;?>-12">
-			    		<div class="panel panel-body border-top-purple">
-							<h6 class="no-margin text-semibold">ช่องทางการชำระ</h6>
-							<label class="radio-inline">
-								<input type="radio" class="styled" name="RSR_Pay" required="required" value="C">
-								เงินสด
-							</label>
+						<div class="panel panel-body border-top-purple">
+							<div class="row">
+								<div class="col-<?php echo $grid;?>-6">
 
-							<label class="radio-inline">
-								<input type="radio" class="styled" name="RSR_Pay" required="required" value="M">
-								เงินโอน
-							</label>
-						</div>					
+									<fieldset class="content-group">
+										<div class="form-group">
+											<label  class="control-label col-<?php echo $grid;?>-3">ส่วนลด/ส่วนเพิ่ม</label>
+											<div class="col-<?php echo $grid;?>-9">
+												<select class="select-search" name="sid_id" id="sid_id" required="required">
+													<optgroup label="รายการ ส่วนลด/ส่วนเพิ่ม">
+
+		<?php
+			$PrintData_IncreaseDecrease=new ShowDataIncreaseDecrease("Loop","-");
+				foreach($PrintData_IncreaseDecrease->RunDataSDIDLoop() as $pay=>$PrintData_IncreaseDecreaseRow){ ?>
+				
+														<option value="<?php echo $PrintData_IncreaseDecreaseRow["sid_id"];?>"><?php echo $PrintData_IncreaseDecreaseRow["sid_txt"];?></option>	
+
+		<?php	} ?>													 
+
+
+													</optgroup>
+												</select>
+											</div>
+										</div>
+
+									</fieldset>
+
+								</div>
+								<div class="col-<?php echo $grid;?>-6">
+
+									<fieldset class="content-group">
+										<div class="form-group">
+											<label class="control-label col-<?php echo $grid;?>-3">ช่องทางการชำระ</label>
+											<div class="col-<?php echo $grid;?>-9">
+
+												<label class="radio-inline">
+													<input type="radio" class="styled" name="RSR_Pay" required="required" value="C">
+													เงินสด
+												</label>
+
+												<label class="radio-inline">
+													<input type="radio" class="styled" name="RSR_Pay" required="required" value="M">
+													เงินโอน
+												</label>			
+
+											</div>
+										</div>
+									</fieldset>
+						
+								</div>
+							</div>
+
+						</div>
 					</div>
-				</div>
 
-							
+				</div>
+	
 			</div>
 		</div>
 	</div>	
@@ -253,6 +303,8 @@
 <script>
 	$(document).ready(function(){
 		$("#RSBtn").click(function(){
+
+				var sid_id=$("#sid_id").val();
 
 <?php
 		$countRS=0;
@@ -268,7 +320,8 @@
 		while($countRS<$count_rs){ ?>
 							StoreInt<?php echo $countRS;?>:store_int<?php echo $countRS;?>,
 <?php	$countRS=$countRS+1;} ?>						
-							Setint:set_int
+							Setint:set_int,
+							sid_id:sid_id
 							
 						},function (store_sum){
 							if(store_sum !=""){

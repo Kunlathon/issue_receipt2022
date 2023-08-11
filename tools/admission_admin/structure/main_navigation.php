@@ -30,15 +30,15 @@
 							<ul class="navigation navigation-main navigation-accordion">
 
 								<!-- Main -->
-								<li class="navigation-header"><span>ตั้งค่าปีการศึกษาใบแทนใบเสร็จรับเงิน ค่าเครื่องแบบนักเรียน</span> <i class="icon-menu" title="Main pages"></i></li>								
+								<li class="navigation-header"><span>ตั้งค่าปีการศึกษาใบแทนใบเสร็จรับเงิน ค่าบำรุงสมาคมสถานศึกษาเอกชน</span> <i class="icon-menu" title="Main pages"></i></li>								
 								<li>
-									<a href="#"><i class="icon-stack2"></i> <span>ใบแทนใบเสร็จรับเงิน ค่าเครื่องแบบนักเรียน</span></a>
+									<a href="#"><i class="icon-stack2"></i> <span>ใบแทนใบเสร็จรับเงิน ค่าบำรุงสมาคมสถานศึกษาเอกชน</span></a>
 									<ul>
-										<li><a href="<?php echo base_url();?>/admission/admin?admission_mod=rc_store_set_year">ตั้งค่าปีการศึกษาใบแทนใบเสร็จรับเงิน ค่าเครื่องแบบนักเรียน</a></li>
+										<li><a href="<?php echo base_url();?>/admission/admin?admission_mod=rc_store_set_year">ตั้งค่าปีการศึกษาใบแทนใบเสร็จรับเงิน ค่าบำรุงสมาคมสถานศึกษาเอกชน</a></li>
 										<li class="navigation-divider"></li>
-										<li><a href="<?php echo base_url();?>/admission/admin?admission_mod=rc_store">ชำระเงินค่ามอบตัวตัดชุดสำหรับนักเรียนใหม่</a></li>
-										<li><a href="<?php echo base_url();?>/admission/admin?admission_mod=real_time_store">แสดงข้อมูล ยอดแต่ละรายการค่าเครื่องแบบนักเรียนใหม่</a></li>
-										<li><a href="<?php echo base_url();?>/admission/admin?admission_mod=report_rc_store">รายงาน ค่าเครื่องแบบนักเรียนใหม่</a></li>
+										<li><a href="<?php echo base_url();?>/admission/admin?admission_mod=rc_store">ชำระเงินค่าบำรุงสมาคมสถานศึกษาเอกชน</a></li>
+										<li><a href="<?php echo base_url();?>/admission/admin?admission_mod=real_time_store">แสดงข้อมูล ยอดแต่ละรายการค่าบำรุงสมาคมสถานศึกษาเอกชนใหม่</a></li>
+										<li><a href="<?php echo base_url();?>/admission/admin?admission_mod=report_rc_store">รายงาน ค่าบำรุงสมาคมสถานศึกษาเอกชนใหม่</a></li>
 									</ul>
 								</li>
 								

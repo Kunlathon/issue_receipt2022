@@ -17,8 +17,8 @@
 //------------------------------------------------------------------
 			
 			if(($this->SDID_Status=="Row")){
-				$SDID_Sql="SELECT 
-						   * FROM `store_inc_dec` 
+				$SDID_Sql="SELECT * 
+						   FROM `store_inc_dec` 
 						   LEFT JOIN `status_inc_dec` on (`store_inc_dec`.`status_id`=`status_inc_dec`.`status_id`) 
 						   WHERE `store_inc_dec`.`sid_id`='{$this->SDID_Txt}';";
 					if(($SDID_Rs=$pdo_store->query($SDID_Sql))){
@@ -63,9 +63,9 @@
 			$pdo_store=null;
 
 		}function RunDataSDIDLoop(){
-			$this->$this->SDID_Array;
+			return  $this->SDID_Array;
 		}function RunDataSDIDError(){
-			$this->$this->SDID_Error;
+			return  $this->SDID_Error;
 		}
 	}
 
@@ -78,6 +78,7 @@
 <?php
 	class SudStoreData{
 		public $SSD_Key,$SSD_Year;
+		public $SudStoreDataArray;
 		function __construct($SSD_Key,$SSD_Year){
 //------------------------------------------------------------------------			
 			$IdAdder=$_SERVER["REMOTE_ADDR"];
@@ -126,6 +127,7 @@
 <?php
 	class RcStoreData{
 		public $RSD;
+		public $RcStoreDataArray;
 		function __construct($RSD){
 //------------------------------------------------------------------------			
 			$IdAdder=$_SERVER["REMOTE_ADDR"];
@@ -219,41 +221,146 @@
 			$ConnectStore=new ConnectStore($IdAdder);
 			$pdo_store=$ConnectStore->CallConnectStore();
 //------------------------------------------------------------------------			
+
+
+//แสดงใบรายการ
+			$StoreSumAll=0;
+			$SUM_C=0;
+			$SUM_M=0;
+			$PrintShowSql="SELECT `RSR_sid_id`,`RSR_NO`
+					       FROM `rcstore_receipt` 
+						   WHERE `RSR_Year`='{$this->SSS_year}'";
+				if(($PrintShowRs=$pdo_store->query($PrintShowSql))){
+					while($PrintShowRow=$PrintShowRs->Fetch(PDO::FETCH_ASSOC)){
+
 //ยอดรวมทั้งหมด
-			$StoreSumAllSql="SELECT SUM(`RL_Price`) AS `SUM_Price` 
-							 FROM `rcstore_list` 
-							 WHERE `RSD_No` LIKE '%{$this->SSS_year}%';";
-				if($StoreSumAllRs=$pdo_store->query($StoreSumAllSql)){
-					$StoreSumAllRow=$StoreSumAllRs->Fetch(PDO::FETCH_ASSOC);
-						if(is_array($StoreSumAllRow) && count($StoreSumAllRow)){
-							$StoreSumAll=$StoreSumAllRow["SUM_Price"];
-						}else{
-							$StoreSumAll="0.00";
-						}
-				}else{
-					$StoreSumAll="0.00";
-				}
-//ยอดรวมทั้งหมด จบ			
+						$StoreSumAllSql="SELECT SUM(`RL_Price`) AS `SUM_Price` 
+										FROM `rcstore_list` 
+										WHERE `RSD_No`='{$PrintShowRow['RSR_NO']}';";
+							if($StoreSumAllRs=$pdo_store->query($StoreSumAllSql)){
+								$StoreSumAllRow=$StoreSumAllRs->Fetch(PDO::FETCH_ASSOC);
+									if(is_array($StoreSumAllRow) && count($StoreSumAllRow)){
+										$StoreSumAll=$StoreSumAllRow["SUM_Price"];
+									}else{
+										$StoreSumAll="0";
+									}
+							}else{
+								$StoreSumAll="0";
+							}
+//ยอดรวมทั้งหมด จบ	
+
+							if(($StoreSumAll!=null)){
+
+								$PrintData_IncreaseDecrease=new ShowDataIncreaseDecrease("Row",$PrintShowRow['RSR_sid_id']);
+								foreach($PrintData_IncreaseDecrease->RunDataSDIDLoop() as $pay=>$PrintData_IncreaseDecreaseRow){
+									$sid_int=$PrintData_IncreaseDecreaseRow["sid_int"];
+									$status_maths=$PrintData_IncreaseDecreaseRow["status_maths"];
+								}
+						
+									if(($PrintData_IncreaseDecrease->RunDataSDIDError()=="NoError")){
+										
+										if(($status_maths=="+")){
+											$StoreSumAll=($StoreSumAll+$sid_int);
+										}elseif(($status_maths=="-")){
+											$StoreSumAll=($StoreSumAll-$sid_int);
+										}elseif(($status_maths=="*")){
+											$StoreSumAll=($StoreSumAll*$sid_int);
+										}elseif(($status_maths=="/")){
+											$StoreSumAll=($StoreSumAll/$sid_int);
+										}else{
+											$StoreSumAll=($StoreSumAll+0);
+										}
+						
+									}else{
+										$StoreSumAll=($StoreSumAll+0);
+									}
+
+
+
+
+							}else{}
+
+
+						$StoreSumAll=$StoreSumAll+$StoreSumAll;
+
+
+
+
+
+						
 //แยก ยอด เงินสด เงินโอน 			
-			$StorePayTypeArray=array();
+			//$StorePayTypeArray=array();
 			$StorePayTypeSql="select sum(`rcstore_list`.`RL_Price`) as `SumStore`,`rcstore_receipt`.`RSR_Pay` 
-							  from `rcstore_receipt` 
-							  left join `rcstore_list` 
-							  on (`rcstore_receipt`.`RSR_NO`=`rcstore_list`.`RSD_No`) 
-							  where `rcstore_receipt`.`RSR_NO` like '%{$this->SSS_year}%' 
+							  from `rcstore_receipt` left join `rcstore_list` on (`rcstore_receipt`.`RSR_NO`=`rcstore_list`.`RSD_No`) 
+							  where `rcstore_receipt`.`RSR_NO` = '{$PrintShowRow['RSR_NO']}' 
 							  group by `rcstore_receipt`.`RSR_Pay`;";
 				if($StorePayTypeRs=$pdo_store->query($StorePayTypeSql)){
-					while($StorePayTypeRow=$StorePayTypeRs->Fetch(PDO::FETCH_ASSOC)){
+					$StorePayTypeRow=$StorePayTypeRs->Fetch(PDO::FETCH_ASSOC);
 						if(is_array($StorePayTypeRow) && count($StorePayTypeRow)){
-							$StorePayTypeArray[]=$StorePayTypeRow;
+							
+							$SumStore=$StorePayTypeRow['SumStore'];
+
+							$Data_IncreaseDecrease=new ShowDataIncreaseDecrease("Row",$PrintShowRow['RSR_sid_id']);
+							foreach($Data_IncreaseDecrease->RunDataSDIDLoop() as $pay=>$Data_IncreaseDecreaseRow){
+								$sid_int=$Data_IncreaseDecreaseRow["sid_int"];
+								$status_maths=$Data_IncreaseDecreaseRow["status_maths"];
+							}
+					
+								if(($Data_IncreaseDecrease->RunDataSDIDError()=="NoError")){
+									
+									if(($status_maths=="+")){
+										$SumStore=($SumStore+$sid_int);
+									}elseif(($status_maths=="-")){
+										$SumStore=($SumStore-$sid_int);
+									}elseif(($status_maths=="*")){
+										$SumStore=($SumStore*$sid_int);
+									}elseif(($status_maths=="/")){
+										$SumStore=($SumStore/$sid_int);
+									}else{
+										$SumStore=($SumStore+0);
+									}
+					
+								}else{
+									$SumStore=($SumStore+0);
+								}
+					
 						}else{
-							$StorePayTypeArray=null;
+							
 						}
-					}
+					
 				}else{
-					$StorePayTypeArray=null;
+					
 				}
-//แยก ยอด เงินสด เงินโอน  จบ			
+//แยก ยอด เงินสด เงินโอน  จบ	
+
+
+				if(($StorePayTypeRow["RSR_Pay"]=="C")){
+					$SUM_C=$SUM_C+$SumStore;
+				}elseif(($StorePayTypeRow["RSR_Pay"]=="M")){
+					$SUM_M=$SUM_M+$SumStore;
+				}else{}
+
+						
+					}
+				}
+
+				
+//แสดงใบรายการ จบ
+
+
+
+
+
+
+
+
+		
+	
+
+
+
+
+
 //ยอด รวมแต่ละ ร้าน
 				$PayingStoreArray=array();
 				$PayingStoreSql="select sum(`rcstore_list`.`RL_Price`) as `SumStore`,`rcstore_list`.`RSR_NO`,`rcstore_data`.`RSD_Txt` 
@@ -297,8 +404,18 @@
 				
 				if(isset($StorePayTypeArray)){
 					$this->StorePayTypeArray=$StorePayTypeArray;
-				}else{}
+				}else{}//-
 				
+
+				if(isset($SUM_C)){
+					$this->SUM_C=$SUM_C;
+				}else{}
+
+				if(isset($SUM_M)){
+					$this->SUM_M=$SUM_M;
+				}else{}
+
+
 				if(isset($PayingStoreArray)){
 					$this->PayingStoreArray=$PayingStoreArray;
 				}else{}
@@ -310,11 +427,19 @@
 			if(isset($this->StoreSumAll)){
 				return $this->StoreSumAll;
 			}else{}
-		}function RunStorePayTypeArray(){
-			if(isset($this->StorePayTypeArray)){
-				return $this->StorePayTypeArray;
+		}function SUM_C(){
+			if(isset($this->SUM_C)){
+				return $this->SUM_C;
 			}else{}
-		}function RunPayingStoreArray(){
+		}function SUM_M(){
+			if(isset($this->SUM_M)){
+				return $this->SUM_M;
+			}else{}
+		}
+		
+		
+		
+		function RunPayingStoreArray(){
 			if(isset($this->PayingStoreArray)){
 				return $this->PayingStoreArray;
 			}else{}			
@@ -374,6 +499,7 @@
 <?php
 	class RowRcStoreList{
 		public $RRSL_RSD;
+		public $RowRcStoreListArray,$SumRcStoreList,$RSR_sid_id;
 		function __construct($RRSL_RSD){
 			$this->RRSL_RSD=$RRSL_RSD;
 			$IdAdder=$_SERVER["REMOTE_ADDR"];
@@ -401,9 +527,51 @@
 						$RowRcStoreListArray=null;
 						$SumRcStoreList=0.00;						
 					}
+
+						if(($SumRcStoreList!="0.00")){
+
+							$rcstore_receipt_sql="SELECT `RSR_sid_id` 
+												  FROM `rcstore_receipt` 
+												  WHERE `RSR_NO`='{$this->RRSL_RSD}'";
+								if(($rcstore_receipt_rs=$pdo_store->query($rcstore_receipt_sql))){
+									$rcstore_receipt_row=$rcstore_receipt_rs->Fetch(PDO::FETCH_ASSOC);
+										if((is_array($rcstore_receipt_row) && count($rcstore_receipt_row))){
+											$RSR_sid_id=$rcstore_receipt_row["RSR_sid_id"];
+											$PrintData_IncreaseDecrease=new ShowDataIncreaseDecrease("Row",$rcstore_receipt_row["RSR_sid_id"]);
+											foreach($PrintData_IncreaseDecrease->RunDataSDIDLoop() as $pay=>$PrintData_IncreaseDecreaseRow){
+												$sid_int=$PrintData_IncreaseDecreaseRow["sid_int"];
+												$status_maths=$PrintData_IncreaseDecreaseRow["status_maths"];
+											}
+									
+												if(($PrintData_IncreaseDecrease->RunDataSDIDError()=="NoError")){
+													
+													if(($status_maths=="+")){
+														$SumRcStoreList=($SumRcStoreList+$sid_int);
+													}elseif(($status_maths=="-")){
+														$SumRcStoreList=($SumRcStoreList-$sid_int);
+													}elseif(($status_maths=="*")){
+														$SumRcStoreList=($SumRcStoreList*$sid_int);
+													}elseif(($status_maths=="/")){
+														$SumRcStoreList=($SumRcStoreList/$sid_int);
+													}else{
+														$SumRcStoreList=($SumRcStoreList+0);
+													}
+									
+												}else{
+													$SumRcStoreList=($SumRcStoreList+0);
+												}
+
+										}else{}
+								}else{}
+
+
+						}else{}
+
+
 			if(isset($RowRcStoreListArray)){
 				$this->RowRcStoreListArray=$RowRcStoreListArray;
 				$this->SumRcStoreList=$SumRcStoreList;
+				$this->RSR_sid_id=$RSR_sid_id;
 				$pdo_store=null;
 			}else{
 				$pdo_store=null;
@@ -416,6 +584,10 @@
 			if(isset($this->SumRcStoreList)){
 				return $this->SumRcStoreList;
 			}else{}
+		}function PrintRSR_sid_id(){
+			if(isset($this->RSR_sid_id)){
+				return $this->RSR_sid_id;
+			}else{}
 		}
 	}
 ?>
@@ -424,6 +596,7 @@
 <?php
 	class DataRcstoreReceipt{
 		public $DRR_Sud,$DRR_Year,$DDR_Run;
+		public $RcstoreReceiptArray;
 		function __construct($DRR_Sud,$DRR_Year,$DDR_Run){
 			
 			$this->DRR_Sud=$DRR_Sud;
@@ -567,6 +740,7 @@
 <?php
 	class DeleteStore{
 		public $DRkey;
+		public $DeleteStoreError;
 		function __construct($DRkey){
 			$this->DRkey=$DRkey;
 			
@@ -652,12 +826,14 @@
 
 <?php
 	class AddDataStore{
-		public $ADS_sud,$ADS_year,$ADS_officer;
-		function __construct($ADS_sud,$ADS_year,$ADS_officer,$ADS_pay){
+		public $ADS_sud,$ADS_year,$ADS_officer,$ADS_pay,$ADS_sid_id;
+		public $CountOn,$ADS_Error;
+		function __construct($ADS_sud,$ADS_year,$ADS_officer,$ADS_pay,$ADS_sid_id){
 			$this->ADS_sud=$ADS_sud;
 			$this->ADS_year=$ADS_year;
 			$this->ADS_officer=$ADS_officer;
 			$this->ADS_pay=$ADS_pay;
+			$this->ADS_sid_id=$ADS_sid_id;
 					
 			$y=date("Y");
 			$y=$y+543;
@@ -693,8 +869,8 @@
 			
 			//Add : rcstore_receipt
 				try{
-					$AddDataStoreSql="INSERT INTO `rcstore_receipt`(`RSR_NO`, `RSR_Sud`, `RSR_Year`, `RSR_DateTime`, `RSR_Officer`,`RSR_Pay`) 
-									  VALUES ('{$CountOn}','{$this->ADS_sud}','{$this->ADS_year}','{$day}','{$this->ADS_officer}','{$this->ADS_pay}')";
+					$AddDataStoreSql="INSERT INTO `rcstore_receipt`(`RSR_NO`, `RSR_Sud`, `RSR_Year`, `RSR_DateTime`, `RSR_Officer`,`RSR_Pay`,`RSR_sid_id`) 
+									  VALUES ('{$CountOn}','{$this->ADS_sud}','{$this->ADS_year}','{$day}','{$this->ADS_officer}','{$this->ADS_pay}','{$this->ADS_sid_id}')";
 					$pdo_store->exec($AddDataStoreSql);
 					$ADS_Error="ON";
 				}catch(PDOException $e){

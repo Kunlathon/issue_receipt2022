@@ -121,21 +121,16 @@
 					</div>				
 				</div>
 
-					<?php
-							foreach($ShowSumStore->RunStorePayTypeArray() as $rc=>$RunStorePayTypeRow){ ?>
+
 						
 				<div class="col-<?php echo $grid;?>-3">
 					<div class="panel panel-body bg-blue-400 has-bg-image">
 						<div class="media no-margin">
 							<div class="media-body">
-								<h3 class="no-margin"><?php echo number_format($RunStorePayTypeRow["SumStore"], 2, '.', ',');?></h3>
-					<?php
-						if($RunStorePayTypeRow["RSR_Pay"]=="C"){	?>
+								<h3 class="no-margin"><?php echo number_format($ShowSumStore->SUM_C(), 2, '.', ',');?></h3>
+
 								<span class="text-uppercase text-size-mini">ยอดเงินสด</span>
-				<?php	}elseif($RunStorePayTypeRow["RSR_Pay"]=="M"){ ?>
-								<span class="text-uppercase text-size-mini">ยอดเงินโอน</span>
-				<?php	}else{}?>			
-				
+			
 							</div>
 
 							<div class="media-right media-middle">
@@ -145,7 +140,23 @@
 					</div>				
 				</div>				
 				
-					<?php	} ?>		
+				<div class="col-<?php echo $grid;?>-3">
+					<div class="panel panel-body bg-blue-400 has-bg-image">
+						<div class="media no-margin">
+							<div class="media-body">
+								<h3 class="no-margin"><?php echo number_format($ShowSumStore->SUM_M(), 2, '.', ',');?></h3>
+
+								<span class="text-uppercase text-size-mini">ยอดเงินสด   <?php echo $ShowSumStore->SUM_M();?></span>
+			
+							</div>
+
+							<div class="media-right media-middle">
+								<i class="icon-bubbles4 icon-3x opacity-75"></i>
+							</div>
+						</div>
+					</div>				
+				</div>	
+					
 	
 			</div>
 			<div class="row">
@@ -195,7 +206,7 @@
 </html>
 <?php	}else{
 	
-	echo "5555";
+	//echo "5555";
 }
 //--------------------------------------------------------------------------
 	

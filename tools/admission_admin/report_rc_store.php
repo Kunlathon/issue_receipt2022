@@ -20,7 +20,7 @@
 <div class="row">
 	<div class="col-<?php echo $grid;?>-12">
 		<div class="panel panel-info">
-			<div class="panel-heading">รายงาน ค่าเครื่องแบบนักเรียนใหม่</div>
+			<div class="panel-heading">รายงาน ค่าบำรุงสมาคมสถานศึกษาเอกชนจังหวัดเชียงใหม่</div>
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-<?php echo $grid;?>-6">

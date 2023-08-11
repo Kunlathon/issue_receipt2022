@@ -9,7 +9,7 @@
 					$CRR_Username="Regina@ict2022";
 					$CRR_Password="Regina@ict2022";
 					$CRR_DB="sys_school_payment";
-					$CRR_Port=3309;
+					$CRR_Port=3306;
 						try{
 							$RunAdmissionRegina=new PDO("mysql:host=$CRR_Server;dbname=$CRR_DB;port=$CRR_Port;charset=utf8",$CRR_Username,$CRR_Password);
 							$RunAdmissionRegina->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

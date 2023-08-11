@@ -1,3 +1,10 @@
+<?php
+	header('Content-Type: text/html; charset=UTF-8');
+//----------------------------------------------------------------------------	
+	include("../../../../tools/database/pdo_rc_store.php");
+	include("../../../../tools/database/class_rc_store.php");
+//----------------------------------------------------------------------------
+?>
 <!--****************************************************************************-->			
     <script type="text/javascript">
         function setScreenHWCookie() {
@@ -24,8 +31,11 @@
 
 <?php
 	$Setint=filter_input(INPUT_POST,'Setint');
+	$sid_id=filter_input(INPUT_POST,'sid_id');
 	$ss_count=0;
 	$ss_sum=0;
+
+//--Loop	
 		while($ss_count<$Setint){
 			
 			if(filter_input(INPUT_POST,'StoreInt'.$ss_count.'')==!null){
@@ -38,6 +48,33 @@
 			$ss_count=$ss_count+1;
 		}
 		
+		
+		$PrintData_IncreaseDecrease=new ShowDataIncreaseDecrease("Row",$sid_id);
+		foreach($PrintData_IncreaseDecrease->RunDataSDIDLoop() as $pay=>$PrintData_IncreaseDecreaseRow){
+			$sid_int=$PrintData_IncreaseDecreaseRow["sid_int"];
+			$status_maths=$PrintData_IncreaseDecreaseRow["status_maths"];
+		}
+
+			if(($PrintData_IncreaseDecrease->RunDataSDIDError()=="NoError")){
+				
+				if(($status_maths=="+")){
+					$ss_sum=($ss_sum+$sid_int);
+				}elseif(($status_maths=="-")){
+					$ss_sum=($ss_sum-$sid_int);
+				}elseif(($status_maths=="*")){
+					$ss_sum=($ss_sum*$sid_int);
+				}elseif(($status_maths=="/")){
+					$ss_sum=($ss_sum/$sid_int);
+				}else{
+					$ss_sum=($ss_sum+0);
+				}
+
+			}else{
+				$ss_sum=($ss_sum+0);
+			}
+
+//Loop End
+
 		
 ?>
 

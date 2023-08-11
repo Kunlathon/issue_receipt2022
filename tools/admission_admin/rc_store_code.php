@@ -21,7 +21,7 @@
 <div class="row">
 	<div class="col-<?php echo $grid;?>-12">
 		<div class="text">
-			<h3 class="no-margin text-semibold">ชำระเงินค่ามอบตัวตัดชุดสำหรับนักเรียนใหม่</h3>		
+			<h3 class="no-margin text-semibold">ชำระเงินค่าบำรุงสมาคมสถานศึกษาเอกชนจังหวัดเชียงใหม่</h3>		
 		</div>
 	</div>
 </div><hr>
@@ -30,6 +30,11 @@
 	$count_rs=filter_input(INPUT_POST,'count_rs');
 	$store_key=filter_input(INPUT_POST,'store_key');
 	$RSR_Pay=filter_input(INPUT_POST,'RSR_Pay');
+	$sid_id=filter_input(INPUT_POST,'sid_id');
+
+	//echo $sid_id."+++++++++";
+
+
 		if(isset($count_rs,$store_key)){
 			$AgainStore=new AgainStore($store_key,$est_year);
 			//$CopyAgainStore=$AgainStore->RunAgainStore();
@@ -53,7 +58,7 @@
 
 				
 <?php			}else{
-					$AddDataStore=new AddDataStore($store_key,$est_year,$ls_key,$RSR_Pay);
+					$AddDataStore=new AddDataStore($store_key,$est_year,$ls_key,$RSR_Pay,$sid_id);
 						if($AddDataStore->RunADS_Error()=="ON"){
 							$count_rsc=0;
 							while($count_rsc<$count_rs){

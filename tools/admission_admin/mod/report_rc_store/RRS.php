@@ -237,6 +237,11 @@
 						
 						<?php	} ?>
 
+
+
+
+
+						
 									<td><div><?php echo  number_format($SumPrice, 2, '.', ',');?></div></td>
 									
 									<td><div><?php echo $PortPayRow["RSR_Officer"];?></div></td>
