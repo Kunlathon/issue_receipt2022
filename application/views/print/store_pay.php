@@ -189,8 +189,24 @@
 				$CRR_RSR_DateTime=$CRR_Row["RSR_DateTime"];
 				$CRR_RSR_Officer=$CRR_Row["RSR_Officer"];
 				$CRR_RSR_Pay=$CRR_Row["RSR_Pay"];
+				$CRR_RSR_tre_id=$CRR_Row["RSR_tre_id"];
 			}
 		
+				if(($CRR_RSR_tre_id!=null)){
+					$CopyDate_treasurer=new manage_treasurer('read_id',$CRR_RSR_tre_id,'-','-');
+					if(($CopyDate_treasurer->Run_Manage_Error()=="no_error")){
+						foreach($CopyDate_treasurer->Run_Manage_Row() as $key=>$CopyDate_treasurerRow){
+							$tre_key=$CopyDate_treasurerRow["tre_id"];
+							$tre_txt=$CopyDate_treasurerRow["tre_name"];
+						} 
+					}else{
+						$tre_key=null;
+						$tre_txt=null;
+					}
+				}else{
+					$tre_key=null;
+					$tre_txt=null;
+				}
 		?>
 
 <!---->
@@ -383,9 +399,9 @@ $qrcode_scb=new qrcode_scb($BillerId,$Ref1,$Ref2,$Amount,$Width);
 				........../........../..........</div>				
 <?php	} ?>	
 				<br>
-				<div>ลงชื่อผู้รับเงิน....................................................</div>
-				<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					(.......................................................)</div>
+				<div>ลงชื่อผู้รับเงิน&nbsp;<img src="<?php echo base_url();?>/tools/image/treasurer/<?php echo $tre_key;?>.jpg" class="img-rounded" alt="Cinque Terre">&nbsp;</div>
+				<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					(&nbsp;<?php echo $tre_txt;?>&nbsp;)</div>
 				<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
 					เหรัญญิก</div>
 				<br>

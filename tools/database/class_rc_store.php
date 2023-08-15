@@ -1,4 +1,110 @@
 <?php
+	class manage_treasurer{
+		public $mt_manage,$mt_tre_id,$mt_tre_name,$mt_tre_status;
+		public $manage_array,$manage_error;
+		function __construct($mt_manage,$mt_tre_id,$mt_tre_name,$mt_tre_status){
+//------------------------------------------------------------------------------			
+			$this->mt_manage=$mt_manage;
+			$this->mt_tre_id=$mt_tre_id;
+			$this->mt_tre_name=$mt_tre_name;
+			$this->mt_tre_status=$mt_tre_status;
+//------------------------------------------------------------------------------
+			$IdAdder=$_SERVER["REMOTE_ADDR"];
+			$ConnectStore=new ConnectStore($IdAdder);
+			$pdo_store=$ConnectStore->CallConnectStore();
+//------------------------------------------------------------------------------
+			$manage_array=array();
+			$manage_error="error";
+//------------------------------------------------------------------------------			
+				if(($this->mt_manage=="read_id")){
+
+					if(($this->mt_tre_id!=null or $this->mt_tre_id!="-")){
+
+						$treasurerSql="SELECT * 
+									   FROM `treasurer` 
+									   WHERE `tre_id`='{$this->mt_tre_id}'";
+							if(($treasurerRs=$pdo_store->query($treasurerSql))){
+								while($treasurerRow=$treasurerRs->Fetch(PDO::FETCH_ASSOC)){
+									if((is_array($treasurerRow) && count($treasurerRow))){
+										$manage_array[]=$treasurerRow;
+										$manage_error="no_error";
+									}else{
+										$manage_array="-";
+										$manage_error="error";
+									}
+								}
+							}else{
+								$manage_array="-";
+								$manage_error="error";
+							}
+
+					}else{
+						$manage_array="-";
+						$manage_error="error";
+					}
+
+				}elseif(($this->mt_manage=="read")){
+
+					if(($this->mt_tre_status!=null or $this->mt_tre_status!="-")){
+
+						$treasurerSql="SELECT * 
+									   FROM `treasurer` 
+									   WHERE `tre_status`='{$this->mt_tre_status}'";
+							if(($treasurerRs=$pdo_store->query($treasurerSql))){
+								while($treasurerRow=$treasurerRs->Fetch(PDO::FETCH_ASSOC)){
+									if((is_array($treasurerRow) && count($treasurerRow))){
+										$manage_array[]=$treasurerRow;
+										$manage_error="no_error";
+									}else{
+										$manage_array="-";
+										$manage_error="error";
+									}
+								}
+							}else{
+								$manage_array="-";
+								$manage_error="error";
+							}
+
+					}else{
+
+						$treasurerSql="SELECT * 
+									   FROM `treasurer`";
+							if(($treasurerRs=$pdo_store->query($treasurerSql))){
+								while($treasurerRow=$treasurerRs->Fetch(PDO::FETCH_ASSOC)){
+									if((is_array($treasurerRow) && count($treasurerRow))){
+										$manage_array[]=$treasurerRow;
+										$manage_error="no_error";
+									}else{
+										$manage_array="-";
+										$manage_error="error";
+									}
+								}
+							}else{
+								$manage_array="-";
+								$manage_error="error";
+							}
+							
+					}
+					
+				}else{
+					$manage_array="-";
+					$manage_error="error";
+				}
+
+				$this->manage_array=$manage_array;
+				$this->manage_error=$manage_error;
+
+				$pdo_store=null;
+
+		}function Run_Manage_Row(){
+			return $this->manage_array;
+		}function Run_Manage_Error(){
+			return $this->manage_error;
+		}
+	}
+?>
+
+<?php
 	class ShowDataIncreaseDecrease{
 		public $SDID_Status,$SDID_Txt;
 		public $SDID_Array,$SDID_Error;
@@ -214,6 +320,7 @@
 <?php
 	class ShowSumStore{
 		public $SSS_year;
+		public $PayingStoreArray,$CountStore,$StoreSumAll,$SUM_M,$SUM_C;
 		function __construct($SSS_year){
 			$this->SSS_year=$SSS_year;
 //------------------------------------------------------------------------			
@@ -347,20 +454,6 @@
 				
 //แสดงใบรายการ จบ
 
-
-
-
-
-
-
-
-		
-	
-
-
-
-
-
 //ยอด รวมแต่ละ ร้าน
 				$PayingStoreArray=array();
 				$PayingStoreSql="select sum(`rcstore_list`.`RL_Price`) as `SumStore`,`rcstore_list`.`RSR_NO`,`rcstore_data`.`RSD_Txt` 
@@ -402,9 +495,9 @@
 					$this->StoreSumAll=$StoreSumAll;
 				}else{}
 				
-				if(isset($StorePayTypeArray)){
+				/*if(isset($StorePayTypeArray)){
 					$this->StorePayTypeArray=$StorePayTypeArray;
-				}else{}//-
+				}else{}*/
 				
 
 				if(isset($SUM_C)){
@@ -459,6 +552,7 @@
 <?php
 	class Upyear{
 		public $y;
+		public $YearError;
 		function __construct($y){
 			$this->y=$y;
 			$IdAdder=$_SERVER["REMOTE_ADDR"];
@@ -609,7 +703,7 @@
 			
 			$RcstoreReceiptArray=array();
 				if($DDR_Run=="A"){
-					$DataRcstoreReceiptSql="SELECT `RSR_NO`, `RSR_Sud`, `RSR_Year`, `RSR_DateTime`, `RSR_Officer`,`RSR_Pay` 
+					$DataRcstoreReceiptSql="SELECT * 
 									    FROM `rcstore_receipt` 
 										WHERE `RSR_Sud`='{$this->DRR_Sud}' 
 										AND `RSR_Year`='{$this->DRR_Year}'";
@@ -625,7 +719,7 @@
 							$RcstoreReceiptArray=null;
 						}					
 				}elseif($DDR_Run=="W"){
-					$DataRcstoreReceiptSql="SELECT `RSR_NO`, `RSR_Sud`, `RSR_Year`, `RSR_DateTime`, `RSR_Officer` 
+					$DataRcstoreReceiptSql="SELECT * 
 									    FROM `rcstore_receipt` 
 										WHERE `RSR_Year`='{$this->DRR_Year}'";
 						if($DataRcstoreReceiptRs=$pdo_store->query($DataRcstoreReceiptSql)){
@@ -661,6 +755,7 @@
 
 <?php
 	class RowStore{
+		public $RowStoreArray;
 		function __construct(){
 			$IdAdder=$_SERVER["REMOTE_ADDR"];
 			$ConnectStore=new ConnectStore($IdAdder);
@@ -698,6 +793,7 @@
 <?php	
 	class AgainStore{
 		public $AS_key,$AS_year;
+		public $RSR_Count;
 		function __construct($AS_key,$AS_year){
 			
 			$this->AS_key=$AS_key;
@@ -785,6 +881,7 @@
 <?php
 	class AddStore_List{
 		public $ASL_RSD,$ALS_RSR,$ALS_Price;
+		public $AddStoreListError;
 		function __construct($ASL_RSD,$ALS_RSR,$ALS_Price){
 			$this->ASL_RSD=$ASL_RSD;
 			$this->ALS_RSR=$ALS_RSR;
@@ -834,6 +931,7 @@
 			$this->ADS_officer=$ADS_officer;
 			$this->ADS_pay=$ADS_pay;
 			$this->ADS_sid_id=$ADS_sid_id;
+			
 					
 			$y=date("Y");
 			$y=$y+543;
@@ -867,10 +965,21 @@
 					$CountOn=null;
 				}
 			
+			// data_treasurer class manage_treasurer
+				$CopyDate_treasurer=new manage_treasurer('read','-','-','on');
+					if(($CopyDate_treasurer->Run_Manage_Error()=="no_error")){
+						foreach($CopyDate_treasurer->Run_Manage_Row() as $key=>$CopyDate_treasurerRow){
+							$RSR_tre_id=$CopyDate_treasurerRow["tre_id"];
+						} 
+					}else{
+						$RSR_tre_id=null;
+					}
+			// data_treasurer class manage_treasurer end
+
 			//Add : rcstore_receipt
 				try{
-					$AddDataStoreSql="INSERT INTO `rcstore_receipt`(`RSR_NO`, `RSR_Sud`, `RSR_Year`, `RSR_DateTime`, `RSR_Officer`,`RSR_Pay`,`RSR_sid_id`) 
-									  VALUES ('{$CountOn}','{$this->ADS_sud}','{$this->ADS_year}','{$day}','{$this->ADS_officer}','{$this->ADS_pay}','{$this->ADS_sid_id}')";
+					$AddDataStoreSql="INSERT INTO `rcstore_receipt`(`RSR_NO`, `RSR_Sud`, `RSR_Year`, `RSR_DateTime`, `RSR_Officer`,`RSR_Pay`,`RSR_sid_id`,`RSR_tre_id`) 
+									  VALUES ('{$CountOn}','{$this->ADS_sud}','{$this->ADS_year}','{$day}','{$this->ADS_officer}','{$this->ADS_pay}','{$this->ADS_sid_id}','{$RSR_tre_id}')";
 					$pdo_store->exec($AddDataStoreSql);
 					$ADS_Error="ON";
 				}catch(PDOException $e){
@@ -903,6 +1012,7 @@
 
 <?php
 	class SetYear{
+		public $ssy_year;
 		function __construct(){
 			$IdAdder=$_SERVER["REMOTE_ADDR"];
 			$ConnectStore=new ConnectStore($IdAdder);
