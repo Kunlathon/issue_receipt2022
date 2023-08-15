@@ -347,16 +347,16 @@
 							if($StoreSumAllRs=$pdo_store->query($StoreSumAllSql)){
 								$StoreSumAllRow=$StoreSumAllRs->Fetch(PDO::FETCH_ASSOC);
 									if(is_array($StoreSumAllRow) && count($StoreSumAllRow)){
-										$StoreSumAll=$StoreSumAllRow["SUM_Price"];
+										$SUM_Price=$StoreSumAllRow["SUM_Price"];
 									}else{
-										$StoreSumAll="0";
+										$SUM_Price="0";
 									}
 							}else{
-								$StoreSumAll="0";
+								$SUM_Price="0";
 							}
 //ยอดรวมทั้งหมด จบ	
 
-							if(($StoreSumAll!=null)){
+							if(($SUM_Price!=null)){
 
 								$PrintData_IncreaseDecrease=new ShowDataIncreaseDecrease("Row",$PrintShowRow['RSR_sid_id']);
 								foreach($PrintData_IncreaseDecrease->RunDataSDIDLoop() as $pay=>$PrintData_IncreaseDecreaseRow){
@@ -367,19 +367,19 @@
 									if(($PrintData_IncreaseDecrease->RunDataSDIDError()=="NoError")){
 										
 										if(($status_maths=="+")){
-											$StoreSumAll=($StoreSumAll+$sid_int);
+											$SUM_Price=($SUM_Price+$sid_int);
 										}elseif(($status_maths=="-")){
-											$StoreSumAll=($StoreSumAll-$sid_int);
+											$SUM_Price=($SUM_Price-$sid_int);
 										}elseif(($status_maths=="*")){
-											$StoreSumAll=($StoreSumAll*$sid_int);
+											$SUM_Price=($SUM_Price*$sid_int);
 										}elseif(($status_maths=="/")){
-											$StoreSumAll=($StoreSumAll/$sid_int);
+											$SUM_Price=($SUM_Price/$sid_int);
 										}else{
-											$StoreSumAll=($StoreSumAll+0);
+											$SUM_Price=($SUM_Price+0);
 										}
 						
 									}else{
-										$StoreSumAll=($StoreSumAll+0);
+										$SUM_Price=($SUM_Price+0);
 									}
 
 
@@ -388,7 +388,7 @@
 							}else{}
 
 
-						$StoreSumAll=$StoreSumAll+$StoreSumAll;
+						$StoreSumAll=$StoreSumAll+$SUM_Price;
 
 
 
@@ -449,6 +449,8 @@
 
 						
 					}
+
+					
 				}
 
 				
@@ -733,6 +735,23 @@
 						}else{
 							$RcstoreReceiptArray=null;
 						}					
+				}elseif(($DDR_Run=="B")){
+					$DataRcstoreReceiptSql="SELECT * 
+											FROM `rcstore_receipt` 
+											WHERE `RSR_Sud`='{$this->DRR_Sud}' 
+											AND `RSR_Year`='{$this->DRR_Year}' 
+											ORDER BY `RSR_NO` DESC";
+						if($DataRcstoreReceiptRs=$pdo_store->query($DataRcstoreReceiptSql)){
+							$DataRcstoreReceiptRow=$DataRcstoreReceiptRs->Fetch(PDO::FETCH_ASSOC);
+								if(is_array($DataRcstoreReceiptRow) && count($DataRcstoreReceiptRow)){
+									$RcstoreReceiptArray[]=$DataRcstoreReceiptRow;
+								}else{
+									$RcstoreReceiptArray=null;
+								}								
+							
+						}else{
+							$RcstoreReceiptArray=null;
+						}	
 				}else{
 					$RcstoreReceiptArray=null;
 				}

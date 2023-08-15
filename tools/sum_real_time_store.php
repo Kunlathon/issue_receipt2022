@@ -146,7 +146,7 @@
 							<div class="media-body">
 								<h3 class="no-margin"><?php echo number_format($ShowSumStore->SUM_M(), 2, '.', ',');?></h3>
 
-								<span class="text-uppercase text-size-mini">ยอดเงินสด   <?php echo $ShowSumStore->SUM_M();?></span>
+								<span class="text-uppercase text-size-mini">ยอดเงินโอน</span>
 			
 							</div>
 
@@ -190,7 +190,7 @@
 
 							<div class="media-body text-right">
 								<h3 class="no-margin"><?php echo $ShowSumStore->RunCountStore();?></h3>
-								<span class="text-uppercase text-size-mini">จำนวนใบแทนใบเสร็จรับเงิน ค่าเครื่องแบบนักเรียน</span>
+								<span class="text-uppercase text-size-mini">จำนวนใบเสร็จ</span>
 							</div>
 						</div>
 					</div>				

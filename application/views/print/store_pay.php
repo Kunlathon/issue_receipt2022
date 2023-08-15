@@ -181,7 +181,7 @@
 		</div>
 
 		<?php
-			$Call_Rcstore_Receipt=new DataRcstoreReceipt($Pay_RSR_Sud,$Pay_RSR_year,"A");
+			$Call_Rcstore_Receipt=new DataRcstoreReceipt($Pay_RSR_Sud,$Pay_RSR_year,"B");
 			foreach($Call_Rcstore_Receipt->RunDataRcstoreReceipt() as $rc=>$CRR_Row){
 				$CRR_RSR_NO=$CRR_Row["RSR_NO"];
 				$CRR_RSR_Sud=$CRR_Row["RSR_Sud"];
@@ -260,7 +260,7 @@
 		<tr>
 			<th style="width: 146px;"><div>ลำดับ</div></th>
 			<th style="width: 446px;"><div>รายการ</div></th>
-			<th style="width: 146px;"><div>จำนวน&nbsp;/&nbsp;บาท</div></th>
+			<th style="width: 146px;"><div>จำนวนเงิน</div></th>
 		</tr>
 	</thead>
 	<tbody>

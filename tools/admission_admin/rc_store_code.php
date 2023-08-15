@@ -77,7 +77,7 @@
 								if($RSC_Error=="ON"){ ?>
 <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 <?php
-	$Call_Rcstore_Receipt=new DataRcstoreReceipt($store_key,$est_year,"A");
+	$Call_Rcstore_Receipt=new DataRcstoreReceipt($store_key,$est_year,"B");
 		foreach($Call_Rcstore_Receipt->RunDataRcstoreReceipt() as $rc=>$CRR_Row){
 			$CRR_RSR_NO=$CRR_Row["RSR_NO"];
 			$CRR_RSR_Sud=$CRR_Row["RSR_Sud"];
