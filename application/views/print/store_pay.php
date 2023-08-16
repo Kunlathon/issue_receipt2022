@@ -388,17 +388,17 @@ $qrcode_scb=new qrcode_scb($BillerId,$Ref1,$Ref2,$Amount,$Width);
 <?php
 		if($CRR_RSR_Pay=="C"){	?>
 				<div>&nbsp;<img src="<?php echo base_url();?>tools/img/f.JPG" width="22" height="22" alt=""/>&nbsp;เงินสด</div>
-				<div>&nbsp;<img src="<?php echo base_url();?>tools/img/t.JPG" width="22" height="22" alt=""/>&nbsp;เงินโอน&nbsp;(QRCode)</div>	
+				<div>&nbsp;<img src="<?php echo base_url();?>tools/img/t.JPG" width="22" height="22" alt=""/>&nbsp;เงินโอน&nbsp;</div>	
 				<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				(&nbsp;<?php echo date_format($PayTime,"d/m/Y");?>&nbsp;)</div>			
 <?php	}elseif($CRR_RSR_Pay=="M"){	?>
 				<div>&nbsp;<img src="<?php echo base_url();?>tools/img/t.JPG" width="22" height="22" alt=""/>&nbsp;เงินสด</div>
-				<div>&nbsp;<img src="<?php echo base_url();?>tools/img/f.JPG" width="22" height="22" alt=""/>&nbsp;เงินโอน&nbsp;(QRCode)</div>
+				<div>&nbsp;<img src="<?php echo base_url();?>tools/img/f.JPG" width="22" height="22" alt=""/>&nbsp;เงินโอน&nbsp;</div>
 				<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				(&nbsp;<?php echo date_format($PayTime,"d/m/Y");?>&nbsp;)</div>			
 <?php	}else{	?>
 				<div>&nbsp;<img src="<?php echo base_url();?>tools/img/t.JPG" width="22" height="22" alt=""/>&nbsp;เงินสด</div>
-				<div>&nbsp;<img src="<?php echo base_url();?>tools/img/t.JPG" width="22" height="22" alt=""/>&nbsp;เงินโอน&nbsp;(QRCode)</div>
+				<div>&nbsp;<img src="<?php echo base_url();?>tools/img/t.JPG" width="22" height="22" alt=""/>&nbsp;เงินโอน&nbsp;</div>
 				<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				........../........../..........</div>				
 <?php	} ?>	
