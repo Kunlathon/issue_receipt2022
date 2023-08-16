@@ -192,6 +192,8 @@
 				$CRR_RSR_tre_id=$CRR_Row["RSR_tre_id"];
 				$RSR_PayTime=$CRR_Row["RSR_PayTime"];
 
+				$RSR_PayTime=date("d-m-Y",strtotime("+543 year",strtotime($RSR_PayTime)));
+
 				$PayTime=date_create("$RSR_PayTime");
 
 			}
@@ -247,7 +249,7 @@
 <table style="width: 740px;" border="0" cellpadding="0" cellspacing="0">
 	<tr>
 		<td style="text-align :right; font-style:bold; font-size: 25px;">
-			<div>&nbsp;วันที่&nbsp;<font style="color: blue"><?php echo date("d/m/Y");?></font>&nbsp;</div>
+			<div>&nbsp;วันที่&nbsp;<font style="color: blue"><?php echo date("d/m/Y",strtotime("+543 year"));?></font>&nbsp;</div>
 		</td>
 	</tr>
 	<tr>

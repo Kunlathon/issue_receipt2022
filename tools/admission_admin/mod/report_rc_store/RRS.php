@@ -167,7 +167,9 @@
 								<tr>
 									<td><div><?php echo $CountPP;?></div></td>
 									<td><div><?php echo date("d-m-Y",strtotime($PortPayRow["RSR_DateTime"]));?></div></td>
-									<td><div><?php echo $PortPayRow["RSR_NO"];?></div></td>
+									<td><div>
+										<a href="http://rc.regina.ac.th/test/issue_receipt/print_admission/store_pay/<?php echo $PortPayRow["RSR_NO"];?>/<?php echo $PortPayRow["RSR_Sud"];?>/<?php echo $est_year;?>" target="_blank"> <?php echo $PortPayRow["RSR_NO"];?></a>
+									</div></td>
 									<td><div><?php echo $PortPayRow["RSR_Sud"];?></div></td>
 					<?php
 						$PrintRc=new PrintReginaClass($PortPayRow["RSR_Sud"],$RRSYear);						
