@@ -31,6 +31,7 @@
 	$store_key=filter_input(INPUT_POST,'store_key');
 	$RSR_Pay=filter_input(INPUT_POST,'RSR_Pay');
 	$sid_id=filter_input(INPUT_POST,'sid_id');
+	$RSR_PayTime=filter_input(INPUT_POST,'RSR_PayTime');
 
 	//echo $sid_id."+++++++++";
 
@@ -58,7 +59,7 @@
 
 				
 <?php			}else{
-					$AddDataStore=new AddDataStore($store_key,$est_year,$ls_key,$RSR_Pay,$sid_id);
+					$AddDataStore=new AddDataStore($store_key,$est_year,$ls_key,$RSR_Pay,$sid_id,$RSR_PayTime);
 						if($AddDataStore->RunADS_Error()=="ON"){
 							$count_rsc=0;
 							while($count_rsc<$count_rs){
@@ -199,3 +200,7 @@
 </div>	
 <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->			
 <?php	} ?>
+
+
+
+

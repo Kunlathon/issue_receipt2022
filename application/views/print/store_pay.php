@@ -190,6 +190,10 @@
 				$CRR_RSR_Officer=$CRR_Row["RSR_Officer"];
 				$CRR_RSR_Pay=$CRR_Row["RSR_Pay"];
 				$CRR_RSR_tre_id=$CRR_Row["RSR_tre_id"];
+				$RSR_PayTime=$CRR_Row["RSR_PayTime"];
+
+				$PayTime=date_create("$RSR_PayTime");
+
 			}
 		
 				if(($CRR_RSR_tre_id!=null)){
@@ -311,9 +315,7 @@ $rs_count=1;
 		<tr style="vertical-align: top;">
 			<td style="text-align :center;">&nbsp;<div></div></td>
 			<td>
-				<div>&nbsp;&nbsp;&nbsp;&nbsp;</div>
 				<div>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $sid_txt;?>&nbsp;</div>
-				<div>&nbsp;&nbsp;&nbsp;&nbsp;</div>
 			</td>
 			<td style="text-align :right;">&nbsp;<div></div></td>
 		</tr>	
@@ -386,12 +388,12 @@ $qrcode_scb=new qrcode_scb($BillerId,$Ref1,$Ref2,$Amount,$Width);
 				<div>&nbsp;<img src="<?php echo base_url();?>tools/img/f.JPG" width="22" height="22" alt=""/>&nbsp;เงินสด</div>
 				<div>&nbsp;<img src="<?php echo base_url();?>tools/img/t.JPG" width="22" height="22" alt=""/>&nbsp;เงินโอน&nbsp;(QRCode)</div>	
 				<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					........../........../..........</div>			
+				(&nbsp;<?php echo date_format($PayTime,"d/m/Y");?>&nbsp;)</div>			
 <?php	}elseif($CRR_RSR_Pay=="M"){	?>
 				<div>&nbsp;<img src="<?php echo base_url();?>tools/img/t.JPG" width="22" height="22" alt=""/>&nbsp;เงินสด</div>
 				<div>&nbsp;<img src="<?php echo base_url();?>tools/img/f.JPG" width="22" height="22" alt=""/>&nbsp;เงินโอน&nbsp;(QRCode)</div>
 				<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				........../........../..........</div>			
+				(&nbsp;<?php echo date_format($PayTime,"d/m/Y");?>&nbsp;)</div>			
 <?php	}else{	?>
 				<div>&nbsp;<img src="<?php echo base_url();?>tools/img/t.JPG" width="22" height="22" alt=""/>&nbsp;เงินสด</div>
 				<div>&nbsp;<img src="<?php echo base_url();?>tools/img/t.JPG" width="22" height="22" alt=""/>&nbsp;เงินโอน&nbsp;(QRCode)</div>

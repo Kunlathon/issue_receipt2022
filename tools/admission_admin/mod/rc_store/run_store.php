@@ -80,6 +80,19 @@
 </script>
 
 
+<script>
+	$(document).ready(function(){
+		$('.daterange-single').daterangepicker({ 
+			singleDatePicker: true,
+			locale: {
+            format: 'DD-MM-YYYY',
+			daysOfWeek: ['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ','ส'],
+			monthNames: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.']
+        }
+		});		
+	})
+</script>
+
 <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->			
 	<?php
 		$AgainStore=new AgainStore($StoreKey,$est_year);
@@ -240,8 +253,26 @@
 				<div class="row">
 					<div class="col-<?php echo $grid;?>-12">
 						<div class="panel panel-body border-top-purple">
+
 							<div class="row">
-								<div class="col-<?php echo $grid;?>-6">
+								<div class="col-<?php echo $grid;?>-4">
+								
+									<fieldset>
+										<div cass="form-group">
+											<label  class="control-label col-<?php echo $grid;?>-4">วันที่จ่ายเงิน</label>
+											
+											<div class="col-<?php echo $grid;?>-8">
+												<div class="input-group">
+													<span class="input-group-addon"><i class="icon-calendar22"></i></span>
+													<input type="text" name="RSR_PayTime" id="RSR_PayTime" class="form-control daterange-single" value="<?php echo date("d/m/Y");?>">
+												</div>
+											</div>
+
+										</div>
+									</fieldset>
+
+								</div>
+								<div class="col-<?php echo $grid;?>-4">
 
 									<fieldset class="content-group">
 										<div class="form-group">
@@ -267,7 +298,7 @@
 									</fieldset>
 
 								</div>
-								<div class="col-<?php echo $grid;?>-6">
+								<div class="col-<?php echo $grid;?>-4">
 
 									<fieldset class="content-group">
 										<div class="form-group">
@@ -295,6 +326,9 @@
 					</div>
 
 				</div>
+				<hr>
+
+
 	
 			</div>
 		</div>

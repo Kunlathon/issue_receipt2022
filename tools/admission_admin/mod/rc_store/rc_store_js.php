@@ -50,7 +50,17 @@
 	<script src="<?php echo base_url();?>/tools/Bootstrap 3/Template/global_assets/js/plugins/notifications/sweet_alert.min.js"></script>
 	<!-- /theme JS files -->
 	
+	<!--picker-->
 	
+	<script src="<?php echo base_url();?>/tools/Bootstrap 3/Template/global_assets/js/plugins/ui/moment/moment.min.js"></script>
+	<script src="<?php echo base_url();?>/tools/Bootstrap 3/Template/global_assets/js/plugins/pickers/daterangepicker.js"></script>
+	<script src="<?php echo base_url();?>/tools/Bootstrap 3/Template/global_assets/js/plugins/pickers/anytime.min.js"></script>
+	<script src="<?php echo base_url();?>/tools/Bootstrap 3/Template/global_assets/js/plugins/pickers/pickadate/picker.js"></script>
+	<script src="<?php echo base_url();?>/tools/Bootstrap 3/Template/global_assets/js/plugins/pickers/pickadate/picker.date.js"></script>
+	<script src="<?php echo base_url();?>/tools/Bootstrap 3/Template/global_assets/js/plugins/pickers/pickadate/picker.time.js"></script>
+	<script src="<?php echo base_url();?>/tools/Bootstrap 3/Template/global_assets/js/plugins/pickers/pickadate/legacy.js"></script>
+	<!--picker-->
+
 	<script>
 		$(document).ready(function (){
 			$("#store_button").click(function (){

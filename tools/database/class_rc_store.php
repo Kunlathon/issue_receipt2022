@@ -942,15 +942,17 @@
 
 <?php
 	class AddDataStore{
-		public $ADS_sud,$ADS_year,$ADS_officer,$ADS_pay,$ADS_sid_id;
+		public $ADS_sud,$ADS_year,$ADS_officer,$ADS_pay,$ADS_sid_id,$ADS_DataStore;
 		public $CountOn,$ADS_Error;
-		function __construct($ADS_sud,$ADS_year,$ADS_officer,$ADS_pay,$ADS_sid_id){
+		function __construct($ADS_sud,$ADS_year,$ADS_officer,$ADS_pay,$ADS_sid_id,$ADS_DataStore){
 			$this->ADS_sud=$ADS_sud;
 			$this->ADS_year=$ADS_year;
 			$this->ADS_officer=$ADS_officer;
 			$this->ADS_pay=$ADS_pay;
 			$this->ADS_sid_id=$ADS_sid_id;
+			$this->ADS_DataStore=$ADS_DataStore;
 			
+			$DataStore=date("Y-m-d",strtotime($this->ADS_DataStore));
 					
 			$y=date("Y");
 			$y=$y+543;
@@ -997,8 +999,8 @@
 
 			//Add : rcstore_receipt
 				try{
-					$AddDataStoreSql="INSERT INTO `rcstore_receipt`(`RSR_NO`, `RSR_Sud`, `RSR_Year`, `RSR_DateTime`, `RSR_Officer`,`RSR_Pay`,`RSR_sid_id`,`RSR_tre_id`) 
-									  VALUES ('{$CountOn}','{$this->ADS_sud}','{$this->ADS_year}','{$day}','{$this->ADS_officer}','{$this->ADS_pay}','{$this->ADS_sid_id}','{$RSR_tre_id}')";
+					$AddDataStoreSql="INSERT INTO `rcstore_receipt`(`RSR_NO`, `RSR_Sud`, `RSR_Year`, `RSR_DateTime`, `RSR_Officer`,`RSR_Pay`,`RSR_sid_id`,`RSR_tre_id`,`RSR_PayTime`) 
+									  VALUES ('{$CountOn}','{$this->ADS_sud}','{$this->ADS_year}','{$day}','{$this->ADS_officer}','{$this->ADS_pay}','{$this->ADS_sid_id}','{$RSR_tre_id}','{$DataStore}')";
 					$pdo_store->exec($AddDataStoreSql);
 					$ADS_Error="ON";
 				}catch(PDOException $e){
