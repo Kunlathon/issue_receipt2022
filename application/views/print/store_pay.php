@@ -216,207 +216,178 @@
 		?>
 
 <!---->
-<section class="sheet padding-10mm printA">
+	<section class="sheet padding-10mm printA">
 
-<table style="width: 740px;" border="0" cellpadding="0" cellspacing="0">
-	<tr>
-		<td style="text-align :left; font-style:bold; font-size: 25px;"><div> <font color="blue"></font></div></td>
-		<td style="text-align :right; font-style:bold; font-size: 25px;"><div>
-		เลขที่ <font><?php echo $CRR_RSR_NO;?></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
-	</tr>
-</table>
+		<table style="width: 740px;" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td style="text-align :left; font-style:bold; font-size: 25px;"><div> เล่มที่ ............</div></td>
+				<td style="text-align :right; font-style:bold; font-size: 25px;"><div>
+				เลขที่ <font><?php echo $CRR_RSR_NO;?></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
+			</tr>
+		</table>
 
-<table style="width: 740px;" border="0" cellpadding="0" cellspacing="0">
-	<tr>
-		<td style="text-align :center; font-style:bold; font-size: 28px; "><div style="font-weight: bold;">ใบเสร็จรับเงิน<div></td>
-	</tr>
-</table>
+		<table style="width: 740px;" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td style="text-align :center; font-style:bold; font-size: 35px; "><div style="font-weight: bold;">ใบเสร็จรับเงิน<div></td>
+			</tr>
+		</table>
 
-<table style="width: 740px;" border="0" cellpadding="0" cellspacing="0">
-	<tr>
-		<td style="width: 40px;">
-			<div><img src="<?php echo base_url();?>/tools/img/images/ss.png" alt="โรงเรียนเรยีนาเชลีวิทยาลัย จังหวัดเชียงใหม่"   style="width: 125px; height: 124px;"/></div>
-		</td>
-		<td style="width: 700px;">
-			<div style="text-align :left; font-style:bold; font-size: 28px; font-weight: bold; "><u>สมาคมสถานศึกษาเอกชนจังหวัดเชียงใหม่</u>&nbsp;</div>
-			<div style="text-align :left; font-style:bold; font-size: 28px; font-weight: bold; ">Chiang Mai Private Education Institution Association&nbsp;</div>
-			<div style="text-align :left; font-style:bold; font-size: 28px; ">409 ถนนเจริญประเทศ ต.ช้างคลาน อ.เมืองเชียงใหม่ จ.เชียงใหม่ 50100&nbsp;</div>
-			<div style="text-align :left; font-style:bold; font-size: 28px; ">โทร 053-276209&nbsp;</div>
-		</td>
-	</tr>
-</table>
+		<table style="width: 740px;" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td style="width: 140px;">
+					<div><img src="<?php echo base_url();?>/tools/img/images/ss.png" alt="โรงเรียนเรยีนาเชลีวิทยาลัย จังหวัดเชียงใหม่"   style="width: 125px; height: 124px;"/></div>
+				</td>
+				<td style="width: 600px;">
+					<div style="text-align :left; font-style:bold; font-size: 35px; font-weight: bold; ">สมาคมสถานศึกษาเอกชนจังหวัดเชียงใหม่&nbsp;</div>
+					<div style="text-align :left; font-style:bold; font-size: 35px; font-weight: bold; ">Chiang Mai Private Education Institution Association&nbsp;</div>
+					<div style="text-align :left; font-style:bold; font-size: 28px; ">409 ถนนเจริญประเทศ ต.ช้างคลาน อ.เมืองเชียงใหม่ จ.เชียงใหม่ 50100&nbsp;</div>
+					<div style="text-align :left; font-style:bold; font-size: 28px; ">โทร 053-276209&nbsp;</div>
+				</td>
+			</tr>
+		</table>
 
-<table style="width: 740px;" border="0" cellpadding="0" cellspacing="0">
-	<tr>
-		<td style="text-align :right; font-style:bold; font-size: 25px;">
-			<div>&nbsp;วันที่&nbsp;<font style="color: blue"><?php echo date("d/m/Y",strtotime("+543 year"));?></font>&nbsp;</div>
-		</td>
-	</tr>
-	<tr>
-		<td style="text-align :left; font-style:bold; font-size: 25px;">
-			<div>ได้รับเงินจาก&nbsp;<font style="color: blue"><?php echo $StudentAdmission->fnameTh."&nbsp";?></font></div>
-		</td>				
-	</tr>
-</table>
-<br>
+		<table style="width: 740px;" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td style="text-align :left; font-style:bold; font-size: 28px;">
+					<div>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						วันที่&nbsp;<font style="color: blue"><?php echo date_format($PayTime,"d/m/Y");?></font>&nbsp;
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align :left; font-style:bold; font-size: 28px;">
+					<div>ได้รับเงินจาก&nbsp;<font style="color: blue"><?php echo $StudentAdmission->fnameTh."&nbsp";?></font></div>
+					<div>ตามรายการดังต่อไปนี้</div>
+				</td>				
+			</tr>
+		</table>
 
 
-<table style="width: 740px; font-size: 25px;" border="1" cellpadding="0" cellspacing="0">
-	<thead>
-		<tr>
-			<th style="width: 146px;"><div>ลำดับ</div></th>
-			<th style="width: 446px;"><div>รายการ</div></th>
-			<th style="width: 146px;"><div>จำนวนเงิน</div></th>
-		</tr>
-	</thead>
-	<tbody>
+
+
+		<table  style="width: 740px; font-style:bold; font-size: 28px;" border="1" cellpadding="0" cellspacing="0">
+			<tr>
+				<th style="width: 60px;"><div>ลำดับที่</div></th>
+				<th style="width: 440px;"><div>รายการ</div></th>
+				<th style="width: 240px;" colspan="2">
+					<div>จำนวนเงิน</div>
+					<div>(บาท)</div>
+				</th>
+			</tr>
+
+
+			<tr style="vertical-align: top;">
+				<td style="width: 60px;" >
+					<div style="text-align :center; font-style:bold; font-size: 24px;">1</div>
+				</td>
+				<td style="width: 440px;">
+					<div style="text-align :left; font-style:bold; font-size: 24px;">&nbsp;&nbsp;&nbsp;&nbsp;ค่าบำรุงสมาคม ฯ ประจำปี <?php echo $CRR_RSR_Year;?></div>
+					<div style="text-align :left; font-style:bold; font-size: 24px;">&nbsp;&nbsp;&nbsp;&nbsp;ตามรายการ ดังนี้</div>
+
+	<?php
+		$StoreListRun=new RowRcStoreList($Pay_RSR_No);
+		$rs_count=1; 
+			foreach($StoreListRun->PrintRowRcStoreList() as $rc=>$StoreListRow){ ?>
+<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+		<?php
+			$sid_id=$StoreListRun->PrintRSR_sid_id();
+			$PrintData_IncreaseDecrease=new ShowDataIncreaseDecrease("Row",$sid_id);
+			foreach($PrintData_IncreaseDecrease->RunDataSDIDLoop() as $pay=>$PrintData_IncreaseDecreaseRow){
+				$sid_int=$PrintData_IncreaseDecreaseRow["sid_int"];
+				$status_maths=$PrintData_IncreaseDecreaseRow["status_maths"];
+				$sid_txt=$PrintData_IncreaseDecreaseRow["sid_txt"];
+			}
+
+				if(($PrintData_IncreaseDecrease->RunDataSDIDError()=="NoError")){
+					if(($sid_id!="sid01")){ ?>
+<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 <?php
-$StoreListRun=new RowRcStoreList($Pay_RSR_No);
-$rs_count=1; 
-	foreach($StoreListRun->PrintRowRcStoreList() as $rc=>$StoreListRow){ ?>
-	
-<?php
-	if(($StoreListRow["RL_Price"]!="0.00")){ ?>
+						if(($StoreListRow["RL_Price"]!="0.00")){ ?>
 
-		<tr style="vertical-align: top;">
-			<td style="text-align :center;"><div><?php echo $rs_count;?></div></td>
-			<td><div>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $StoreListRow["RSD_Txt"];?></div></td>
-			<td style="text-align :right;"><div><?php echo number_format($StoreListRow["RL_Price"], 2, '.', ',');?>&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
-		</tr>
-
-<?php $rs_count=$rs_count+1; ?>
-
-<?php	}else{} ?>
-
-	
-<?php
+							<div style="text-align :left; font-style:bold; font-size: 24px;">
+							&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $StoreListRow["RSD_Txt"];?>
+							&nbsp;&nbsp;&nbsp;&nbsp;<?php echo number_format($StoreListRow["RL_Price"], 0, '.', ',');?>&nbsp;คน
+							</div>
 
 
-?>
+				<?php $rs_count=$rs_count+1; ?>
+
+				<?php	}else{} ?>	
+<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+		<?php		}else{ ?>
+<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+				<?php
+						if(($StoreListRow["RL_Price"]!="0.00")){ ?>
+
+							<div style="text-align :left; font-style:bold; font-size: 24px;">
+							&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $StoreListRow["RSD_Txt"];?>
+						    </div>
 
 
-	
-<?php	//$rs_count=$rs_count+1;
-	} ?>
+				<?php $rs_count=$rs_count+1; ?>
 
+				<?php	}else{} ?>	
+<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+		<?php       } ?>
+		<?php 	}else{} ?>
+<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+	<?php	} ?>
 
-<?php
-		$sid_id=$StoreListRun->PrintRSR_sid_id();
+	<?php $bathformat=new bathformat(number_format($StoreListRun->PrintSumRcStoreList(), 2, '.', ','));?>
 
-		$PrintData_IncreaseDecrease=new ShowDataIncreaseDecrease("Row",$sid_id);
-		foreach($PrintData_IncreaseDecrease->RunDataSDIDLoop() as $pay=>$PrintData_IncreaseDecreaseRow){
-			$sid_int=$PrintData_IncreaseDecreaseRow["sid_int"];
-			$status_maths=$PrintData_IncreaseDecreaseRow["status_maths"];
-			$sid_txt=$PrintData_IncreaseDecreaseRow["sid_txt"];
-		}
+				</td>
+				<td style="width: 200px;">
+					<div style="text-align :right; font-style:bold; font-size: 24px;"><?php echo number_format($StoreListRun->PrintSumRcStoreList(), 2, '.', ',');?></div>
+				</td>
+				<td style="width: 40px;">
+					<div>-</div>
+				</td>
 
-			if(($PrintData_IncreaseDecrease->RunDataSDIDError()=="NoError")){
-
-				if(($sid_id!="sid01")){ ?>
-					
-		<tr style="vertical-align: top;">
-			<td style="text-align :center;">&nbsp;<div></div></td>
-			<td>
-				<div>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $sid_txt;?>&nbsp;</div>
-			</td>
-			<td style="text-align :right;">&nbsp;<div></div></td>
-		</tr>	
-
-<?php				}else{ ?>
-
-		<!--<tr style="vertical-align: top;">
-			<td style="text-align :center;">&nbsp;<div></div></td>
-			<td>
-				<div>&nbsp;&nbsp;&nbsp;&nbsp;</div>
-				<div>&nbsp;&nbsp;&nbsp;&nbsp;</div>
-				<div>&nbsp;&nbsp;&nbsp;&nbsp;</div>
-			</td>
-			<td style="text-align :right;">&nbsp;<div></div></td>
-		</tr>-->	
-
-<?php               }
-
-			}else{ ?>
-
-		<!--<tr style="vertical-align: top;">
-			<td style="text-align :center;">&nbsp;<div></div></td>
-			<td>
-				<div>&nbsp;&nbsp;&nbsp;&nbsp;</div>
-				<div>&nbsp;&nbsp;&nbsp;&nbsp;</div>
-				<div>&nbsp;&nbsp;&nbsp;&nbsp;</div>
-			</td>
-			<td style="text-align :right;">&nbsp;<div></div></td>
-		</tr>-->	
-
-<?php		    } ?>
+			</tr>
 
 
 
+			<tr style="vertical-align: top;">
+				<td colspan="2">
+					<div style="text-align :right; font-style:bold; font-size: 24px;"> รวมเป็นเงินทั้งสิ้น </div>					
+				</td>
+				<td>
+					<div style="text-align :right; font-style:bold; font-size: 24px;"><?php echo number_format($StoreListRun->PrintSumRcStoreList(), 2, '.', ',');?></div>
+				</td>
+				<td>
+					<div style="text-align :left; font-style:bold; font-size: 24px;">-</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4">
+					<div style="text-align :center;  font-size: 24px;">( <?php echo $bathformat->run_pay();?> )</div>					
+				</td>
+			</tr>
+		</table>
 
-<?php $bathformat=new bathformat(number_format($StoreListRun->PrintSumRcStoreList(), 2, '.', ','));?>
+		<br>
 
-		<tr style="vertical-align: top;">
-			<td style="text-align :center;"><div>รวม</div></td>
-			<td style="text-align :center;"><div><font style="font-weight: bold;"><?php echo $bathformat->run_pay();?></font></div></td>
-			<td style="text-align :right;"><div><?php echo number_format($StoreListRun->PrintSumRcStoreList(), 2, '.', ',');?>&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
-		</tr>
-		
-	</tbody>		
-</table>
-<?php
-$BillerId="099400043439110";
-$Ref1=$Pay_RSR_Sud;
-$Ref2="RCSTORE".$Pay_RSR_No;
-$Amount=number_format($StoreListRun->PrintSumRcStoreList(), 2, '.', '');
-$Width=145;
-$qrcode_scb=new qrcode_scb($BillerId,$Ref1,$Ref2,$Amount,$Width);
-?>
-<div>&nbsp;</div>
-<table style="width: 740px; font-size: 25px;" border="0" cellpadding="0" cellspacing="0">
-	<tbody>
-		<tr>
-			<td style="width: 370px;">
-				<!--<div>
-					<center><img src="<?php echo $qrcode_scb->call_qrcode_scb();?>"  width="145"><center>    
-				</div>
-				<div style="text-align :left;">Biller&nbsp;ID&nbsp;:&nbsp;<?php echo $BillerId;?></div>
-				<div style="text-align :left;">Ref.1&nbsp;:&nbsp;<?php echo $Ref1;?></div>
-				<div style="text-align :left;">Ref.2&nbsp;:&nbsp;<?php echo $Ref2;?></div>--> 
-			</td>					
-			<td style="width: 370px;">
-				<div style="text-align :center;">ช่องทางการชำระเงิน</div>
-<?php
-		if($CRR_RSR_Pay=="C"){	?>
-				<div>&nbsp;<img src="<?php echo base_url();?>tools/img/f.JPG" width="22" height="22" alt=""/>&nbsp;เงินสด</div>
-				<div>&nbsp;<img src="<?php echo base_url();?>tools/img/t.JPG" width="22" height="22" alt=""/>&nbsp;เงินโอน&nbsp;</div>	
-				<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				(&nbsp;<?php echo date_format($PayTime,"d/m/Y");?>&nbsp;)</div>			
-<?php	}elseif($CRR_RSR_Pay=="M"){	?>
-				<div>&nbsp;<img src="<?php echo base_url();?>tools/img/t.JPG" width="22" height="22" alt=""/>&nbsp;เงินสด</div>
-				<div>&nbsp;<img src="<?php echo base_url();?>tools/img/f.JPG" width="22" height="22" alt=""/>&nbsp;เงินโอน&nbsp;</div>
-				<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				(&nbsp;<?php echo date_format($PayTime,"d/m/Y");?>&nbsp;)</div>			
-<?php	}else{	?>
-				<div>&nbsp;<img src="<?php echo base_url();?>tools/img/t.JPG" width="22" height="22" alt=""/>&nbsp;เงินสด</div>
-				<div>&nbsp;<img src="<?php echo base_url();?>tools/img/t.JPG" width="22" height="22" alt=""/>&nbsp;เงินโอน&nbsp;</div>
-				<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				........../........../..........</div>				
-<?php	} ?>	
-				<br>
-				<div>ลงชื่อผู้รับเงิน&nbsp;<img src="<?php echo base_url();?>/tools/image/treasurer/<?php echo $tre_key;?>.jpg" class="img-rounded" alt="Cinque Terre">&nbsp;</div>
-				<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					(&nbsp;<?php echo $tre_txt;?>&nbsp;)</div>
-				<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
-					เหรัญญิก</div>
-				<br>
-			</td>
-		</tr>
-	</tbody>
-</table>
+		<table style="text-align :center; width: 740px; font-size: 25px;" border="0" cellpadding="0" cellspacing="0">
+			<tbody>
+				<tr>
+					<td>
+						<div>ลงชื่อผู้รับเงิน&nbsp;<img src="<?php echo base_url();?>/tools/image/treasurer/<?php echo $tre_key;?>.jpg" class="img-rounded" alt="Cinque Terre">&nbsp;</div>
+						<div>
+							(&nbsp;<?php echo $tre_txt;?>&nbsp;)</div>
+						<div>	
+							เหรัญญิกสมาคมสถานศึกษาเอกชน จ.เชียงใหม่</div>
+						<br>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 
 
-
-</section>
+	</section>
 <!---->
 
 
