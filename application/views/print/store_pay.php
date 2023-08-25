@@ -194,7 +194,11 @@
 
 				$RSR_PayTime=date("d-m-Y",strtotime("+543 year",strtotime($RSR_PayTime)));
 
-				$PayTime=date_create("$RSR_PayTime");
+				$PayTime=date_create($RSR_PayTime);
+
+				$RSR_Print=date("Y-m-d");
+				$RSR_Print=date("d-m-Y",strtotime("+543 year",strtotime($RSR_Print)));
+				$Print_Time=date_create($RSR_Print);
 
 			}
 		
@@ -254,7 +258,7 @@
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						วันที่&nbsp;<font style="color: blue"><?php echo date_format($PayTime,"d/m/Y");?></font>&nbsp;
+						วันที่&nbsp;<font style="color: blue"><?php echo date_format($Print_Time,"d/m/Y") ;?></font>&nbsp;
 					</div>
 				</td>
 			</tr>
@@ -281,7 +285,7 @@
 				</th>
 			</tr>
 			<tr>
-				<td>
+				<td style="vertical-align: text-top;">
 					<div style="text-align :center; font-style:bold; font-size: 18px;">1</div>
 				</td>
 				<td colspan="2">
@@ -451,12 +455,8 @@
 				<td>
 <!--+++++++-->			
 
-					<div style="text-align :left; font-style:bold; font-size: 18px;">
-				
-					</div>
-					<div style="text-align :left; font-style:bold; font-size: 18px;">
-				
-					</div>
+					<div style="text-align :left; font-style:bold; font-size: 18px;">&nbsp;</div>
+					<div style="text-align :left; font-style:bold; font-size: 18px;">&nbsp;</div>
 
 
 	<?php
@@ -479,10 +479,11 @@
 <?php
 						if(($StoreListRow["RL_Price"]!="0.00")){ ?>
 
-								<div style="text-align :left; font-style:bold; font-size: 18px;">
-								<?php echo number_format($StoreListRow["RL_Price"], 0, '.', ',');?>
+								<div style="text-align :right; font-style:bold; font-size: 18px;">
+								<?php echo number_format($StoreListRow["RL_Price"]*10, 2, '.', ',');?>&nbsp;&nbsp;
 								</div>
 
+								<!--ชั่วคราวไปก่อน กลับมาแก้-->
 
 				<?php $rs_count=$rs_count+1; ?>
 
@@ -493,7 +494,9 @@
 				<?php
 						if(($StoreListRow["RL_Price"]!="0.00")){ ?>
 
-						
+								<div style="text-align :right; font-style:bold; font-size: 18px;">
+								<?php echo number_format($StoreListRow["RL_Price"], 2, '.', ',');?>&nbsp;&nbsp;
+								</div>
 
 
 				<?php $rs_count=$rs_count+1; ?>
@@ -517,7 +520,7 @@
 					<div style="text-align :left; font-style:bold; font-size: 18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ตัวอักษร&nbsp;(<?php echo $bathformat->run_pay();?>)</div>
 				</td>
     			<td>
-				<div style="text-align :right; font-style:bold; font-size: 18px;"><?php echo number_format($StoreListRun->PrintSumRcStoreList(), 2, '.', ',');?></div>
+				<div style="text-align :right; font-style:bold; font-size: 18px;"><?php echo number_format($StoreListRun->PrintSumRcStoreList(), 2, '.', ',');?>&nbsp;&nbsp;</div>
 				
 				</td>
 			</tr>
@@ -527,36 +530,38 @@
 		<table style=" width: 740px; font-size: 18px;" border="0" cellpadding="0" cellspacing="0">
 			<tbody>
 				<tr>
-					<td ><div style="vertical-align: text-top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ชำระโดย</div></td>					
+					<td style="vertical-align: text-top;"><div >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ชำระโดย</div></td>					
 					<td >
 						
 		<?php
 				if($CRR_RSR_Pay=="C"){	?>
 						<div>&nbsp;<img src="<?php echo base_url();?>tools/img/f.JPG" width="22" height="22" alt=""/>&nbsp;&nbsp;เงินสด&nbsp;&nbsp;</div>
-						<div>&nbsp;<img src="<?php echo base_url();?>tools/img/t.JPG" width="22" height="22" alt=""/>&nbsp;&nbsp;เงินโอน&nbsp;&nbsp;</div>				
+						<div>&nbsp;<img src="<?php echo base_url();?>tools/img/t.JPG" width="22" height="22" alt=""/>&nbsp;&nbsp;เงินโอน&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>				
 		<?php	}elseif($CRR_RSR_Pay=="M"){	?>
 						<div>&nbsp;<img src="<?php echo base_url();?>tools/img/t.JPG" width="22" height="22" alt=""/>&nbsp;&nbsp;เงินสด&nbsp;&nbsp;</div>
-						<div>&nbsp;<img src="<?php echo base_url();?>tools/img/f.JPG" width="22" height="22" alt=""/>&nbsp;&nbsp;เงินโอน&nbsp;&nbsp;</div>		
+						<div>&nbsp;<img src="<?php echo base_url();?>tools/img/f.JPG" width="22" height="22" alt=""/>&nbsp;&nbsp;เงินโอน&nbsp;&nbsp;วันที่&nbsp;&nbsp;<?php echo date_format($PayTime,"d/m/Y");?>&nbsp;&nbsp;</div>		
 		<?php	}else{	?>
 						<div>&nbsp;<img src="<?php echo base_url();?>tools/img/t.JPG" width="22" height="22" alt=""/>&nbsp;&nbsp;เงินสด&nbsp;&nbsp;</div>
 						<div>&nbsp;<img src="<?php echo base_url();?>tools/img/t.JPG" width="22" height="22" alt=""/>&nbsp;&nbsp;เงินโอน&nbsp;&nbsp;</div>				
 		<?php	} ?>			
 						<div>&nbsp;</div>
-						<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;วันที่ </div>
-						<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ลงชื่อผู้รับเงิน.......................................................</div>
+						<!--<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						วันที่&nbsp;&nbsp;<?php echo date_format($PayTime,"d/m/Y");?>&nbsp;&nbsp;</div>
+						<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						ลงชื่อผู้รับเงิน.......................................................</div>-->
 					</td>
 				</tr>
 			</tbody>
 		</table>
 
 		<div>&nbsp;</div>
-		<div>&nbsp;</div>
+
 
 		<table style="text-align :center; width: 740px; font-size: 18px;" border="0" cellpadding="0" cellspacing="0">
 			<tbody>
 				<tr>
 					<td>
-						<div>ลงชื่อผู้รับเงิน&nbsp;<img src="<?php echo base_url();?>/tools/image/treasurer/<?php echo $tre_key;?>.jpg" class="img-rounded" alt="Cinque Terre">&nbsp;</div>
+						<div>ลงชื่อ&nbsp;<img src="<?php echo base_url();?>/tools/image/treasurer/<?php echo $tre_key;?>.jpg" class="img-rounded" alt="Cinque Terre">&nbsp;ผู้รับเงิน</div>
 						<div>
 							(&nbsp;<?php echo $tre_txt;?>&nbsp;)</div>
 						<div>	
