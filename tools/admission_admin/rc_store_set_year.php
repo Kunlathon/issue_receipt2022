@@ -12,7 +12,7 @@
 <div class="row">
 	<div class="col-<?php echo $grid;?>-12">
 		<div class="text">
-			<h3 class="no-margin text-semibold">ตั้งค่าปีการศึกษาใบแทนใบเสร็จรับเงิน ค่าเครื่องแบบนักเรียน</h3>		
+			<h3 class="no-margin text-semibold">ตั้งค่าปีการศึกษาใบเสร็จรับเงิน ค่าบำรุงสมาคมสถานศึกษาเอกชนจังหวัดเชียงใหม่</h3>		
 		</div>
 	</div>
 </div><hr>

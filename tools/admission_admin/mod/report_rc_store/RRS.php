@@ -239,13 +239,18 @@
 						
 						<?php	} ?>
 
+<!---->
+	<?php
+		$StoreListRun=new RowRcStoreList($PortPayRow["RSR_NO"]);
+
+	?>
 
 
-
-
-						
-									<td><div><?php echo  number_format($SumPrice, 2, '.', ',');?></div></td>
+<!---->
+									<td><div><?php echo number_format($StoreListRun->PrintSumRcStoreList(), 2, '.', ',');?></div></td>
 									
+
+
 									<td><div><?php echo $PortPayRow["RSR_Officer"];?></div></td>
 									
 								</tr>								
